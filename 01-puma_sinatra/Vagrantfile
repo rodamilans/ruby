@@ -1,0 +1,21 @@
+Vagrant.configure("2") do |config|
+  # config.vm.box = "bento/ubuntu-20.04"
+  config.vm.box = "debian/bullseye64"
+  config.vm.provision "shell", path: "provision.sh"
+  config.vm.network "forwarded_port", guest: 80, host: 8080, id: "nginx"
+  config.vm.network "forwarded_port", guest: 4567, host: 4567, id: "puma"
+
+
+  config.vm.provider :virtualbox do |vb|
+		vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+		vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+
+		vb.customize ["modifyvm", :id, "--cpus", "2"]
+		vb.customize ["modifyvm", :id, "--memory", "1024"]
+	end
+
+end
+
+# vagrant --provision
+# vagrant reload --provision
+# vagrant reload --provision-with shell
