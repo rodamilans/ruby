@@ -28,7 +28,7 @@ gem install sinatra
 
 # deploy app
 git clone https://github.com/rodamilans/ruby.git
-cd 01-puma_sinatra/
+cd ruby/01-puma_sinatra/
 ruby app_puma.rb
 
 
